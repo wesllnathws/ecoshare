@@ -44,16 +44,22 @@ Dados protegidos por middleware de autenticação
 **Github**: @wesllnathws / https://github.com/wesllnathws <br>
 **Responsabilidades**: Views & CSS <Br>
 **Arquivos**: views/ e public/css/main.css <br>
-**Commits**: ajusta layout das páginas, muda cores, melhora cards, adiciona responsividade.
+**Commits**: ajusta layout das páginas, muda cores, melhora cards, adiciona responsividade. <br>
+
+![Imagem](/authlogin.png)
 
 **Integrante 2**: Glauber <br>
 **Github**: Binhu01 / https://github.com/Binhu01 <br>
 **Responsabilidades**: Rotas & Controllers
 **Arquivos**: routes/ e controllers/ <br>
-**Commits**: adiciona validações, corrige redirects, ajusta lógica dos controllers.
+**Commits**: adiciona validações, corrige redirects, ajusta lógica dos controllers. <br>
+
+![reference image](/routes.png)
 
 **Integrante 3**: Vinicius <br>
 **Github**: @vinymoura / https://github.com/vinymouraa <br>
 **Responsabilidades**: Models, Auth & Deploy <br>
 **Arquivos**: models/, middleware/auth.js, vercel.json, config database.js <br>
-**Commits**: cria schema do banco, implementa JWT, configura seed, ajusta vercel.
+**Commits**: cria schema do banco, implementa JWT, configura seed, ajusta vercel. <br>
+
+![imagem de apoio](/modelsdb.png)
