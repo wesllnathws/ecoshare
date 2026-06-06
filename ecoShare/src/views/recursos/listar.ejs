@@ -1,0 +1,69 @@
+<%- include('../partials/header') %>
+
+<div class="container page-top">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Explorar Recursos</h1>
+      <p class="page-sub">Encontre o que precisa na sua comunidade</p>
+    </div>
+    <% if (usuarioLogado) { %>
+      <a href="/recursos/novo" class="btn-primary">+ Novo Recurso</a>
+    <% } %>
+  </div>
+
+  <form class="filter-bar" method="GET" action="/recursos">
+    <input type="text" name="busca" placeholder="🔍 Buscar recursos..." value="<%= filtros.busca || '' %>" class="filter-input" />
+    <select name="categoria" class="filter-select">
+      <option value="">Todas as categorias</option>
+      <option value="ferramenta" <%= filtros.categoria === 'ferramenta' ? 'selected' : '' %>>🔧 Ferramentas</option>
+      <option value="eletronico" <%= filtros.categoria === 'eletronico' ? 'selected' : '' %>>💻 Eletrônicos</option>
+      <option value="movel" <%= filtros.categoria === 'movel' ? 'selected' : '' %>>🪑 Móveis</option>
+      <option value="veiculo" <%= filtros.categoria === 'veiculo' ? 'selected' : '' %>>🚲 Veículos</option>
+      <option value="jardim" <%= filtros.categoria === 'jardim' ? 'selected' : '' %>>🌿 Jardinagem</option>
+      <option value="esporte" <%= filtros.categoria === 'esporte' ? 'selected' : '' %>>⚽ Esporte</option>
+      <option value="outro" <%= filtros.categoria === 'outro' ? 'selected' : '' %>>📦 Outro</option>
+    </select>
+    <select name="disponivel" class="filter-select">
+      <option value="">Todos</option>
+      <option value="true" <%= filtros.disponivel === 'true' ? 'selected' : '' %>>Disponíveis</option>
+      <option value="false" <%= filtros.disponivel === 'false' ? 'selected' : '' %>>Indisponíveis</option>
+    </select>
+    <button type="submit" class="btn-filter">Filtrar</button>
+    <a href="/recursos" class="btn-clear">Limpar</a>
+  </form>
+
+  <% if (recursos.length === 0) { %>
+    <div class="empty-state">
+      <div class="empty-icon">🌱</div>
+      <p>Nenhum recurso encontrado.</p>
+      <% if (usuarioLogado) { %>
+        <a href="/recursos/novo" class="btn-primary">Compartilhe o primeiro!</a>
+      <% } %>
+    </div>
+  <% } else { %>
+    <div class="recursos-grid">
+      <% recursos.forEach(r => { %>
+        <a href="/recursos/<%= r.id %>" class="recurso-card">
+          <div class="card-img">
+            <% const emojis = {ferramenta:'🔧',eletronico:'💻',movel:'🪑',veiculo:'🚲',jardim:'🌿',esporte:'⚽',outro:'📦'}; %>
+            <span class="card-emoji"><%= emojis[r.categoria] || '📦' %></span>
+            <span class="card-badge <%= r.disponivel ? 'badge-green' : 'badge-red' %>">
+              <%= r.disponivel ? 'Disponível' : 'Indisponível' %>
+            </span>
+          </div>
+          <div class="card-body">
+            <span class="card-cat"><%= r.categoria %></span>
+            <h3 class="card-title"><%= r.titulo %></h3>
+            <p class="card-desc"><%= r.descricao.substring(0, 80) %>...</p>
+            <div class="card-meta">
+              <span>📍 <%= r.localizacao %></span>
+              <span>👤 <%= r.dono.nome %></span>
+            </div>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

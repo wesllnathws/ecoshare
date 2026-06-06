@@ -1,0 +1,66 @@
+<%- include('partials/header') %>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🌱 Economia Colaborativa Sustentável</div>
+    <h1 class="hero-title">Compartilhe recursos.<br/>Reduza o desperdício.</h1>
+    <p class="hero-sub">Empreste e tome emprestado bens, ferramentas e equipamentos com sua comunidade. Consumo consciente começa aqui.</p>
+    <div class="hero-actions">
+      <a href="/recursos" class="btn-hero">Explorar Recursos</a>
+      <% if (!usuarioLogado) { %>
+        <a href="/auth/cadastro" class="btn-hero-outline">Criar Conta Grátis</a>
+      <% } else { %>
+        <a href="/recursos/novo" class="btn-hero-outline">Compartilhar Recurso</a>
+      <% } %>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-cards">
+      <div class="hcard">🔧 <span>Ferramentas</span></div>
+      <div class="hcard">🚲 <span>Veículos</span></div>
+      <div class="hcard">💻 <span>Eletrônicos</span></div>
+      <div class="hcard">🌿 <span>Jardinagem</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <div class="container">
+    <h2 class="section-title">Como funciona</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Cadastre-se</h3>
+        <p>Crie sua conta gratuitamente e faça parte da comunidade EcoShare.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Compartilhe</h3>
+        <p>Cadastre seus recursos disponíveis para outras pessoas da comunidade.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Solicite</h3>
+        <p>Encontre o que precisa e envie uma solicitação ao dono do recurso.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Ganhe pontos</h3>
+        <p>Cada compartilhamento gera pontos e contribui para um mundo mais sustentável.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Pronto para começar?</h2>
+      <p>Junte-se a centenas de pessoas que já compartilham recursos na sua cidade.</p>
+      <a href="/auth/cadastro" class="btn-hero">Participar agora</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

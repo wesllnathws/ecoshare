@@ -1,0 +1,99 @@
+<%- include('../partials/header') %>
+
+<div class="container page-top">
+  <a href="/recursos" class="back-link">← Voltar para recursos</a>
+
+  <div class="detail-wrap">
+    <div class="detail-main">
+      <div class="detail-img-box">
+        <% const emojis = {ferramenta:'🔧',eletronico:'💻',movel:'🪑',veiculo:'🚲',jardim:'🌿',esporte:'⚽',outro:'📦'}; %>
+        <span class="detail-emoji"><%= emojis[recurso.categoria] || '📦' %></span>
+        <span class="detail-badge <%= recurso.disponivel ? 'badge-green' : 'badge-red' %>">
+          <%= recurso.disponivel ? '✅ Disponível' : '❌ Indisponível' %>
+        </span>
+      </div>
+
+      <div class="detail-info">
+        <div class="detail-cat"><%= recurso.categoria %></div>
+        <h1 class="detail-title"><%= recurso.titulo %></h1>
+        <p class="detail-desc"><%= recurso.descricao %></p>
+
+        <div class="detail-meta-box">
+          <div class="meta-item"><span>📍</span> <%= recurso.localizacao %></div>
+          <div class="meta-item"><span>👤</span> <%= recurso.dono.nome %></div>
+          <div class="meta-item"><span>🏙️</span> <%= recurso.dono.cidade %></div>
+        </div>
+
+        <% if (usuarioLogado && usuarioLogado.id !== recurso.usuarioId && recurso.disponivel) { %>
+          <div class="solicit-form-box">
+            <h3>Solicitar este recurso</h3>
+            <form action="/recursos/solicitar" method="POST" class="solicit-form">
+              <input type="hidden" name="recursoId" value="<%= recurso.id %>" />
+              <div class="field-row">
+                <div class="field">
+                  <label>Data de início</label>
+                  <input type="date" name="dataInicio" required />
+                </div>
+                <div class="field">
+                  <label>Data de devolução</label>
+                  <input type="date" name="dataFim" required />
+                </div>
+              </div>
+              <div class="field">
+                <label>Mensagem para o dono</label>
+                <textarea name="mensagem" rows="3" placeholder="Explique como pretende usar o recurso..." required></textarea>
+              </div>
+              <button type="submit" class="btn-primary">Enviar Solicitação</button>
+            </form>
+          </div>
+        <% } else if (!usuarioLogado) { %>
+          <div class="login-cta">
+            <a href="/auth/login" class="btn-primary">Entre para solicitar este recurso</a>
+          </div>
+        <% } else if (usuarioLogado.id === recurso.usuarioId) { %>
+          <div class="owner-actions">
+            <a href="/recursos/<%= recurso.id %>/editar" class="btn-outline">✏️ Editar</a>
+            <form action="/recursos/<%= recurso.id %>/deletar" method="POST" onsubmit="return confirm('Tem certeza?')">
+              <button type="submit" class="btn-danger">🗑️ Excluir</button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <% if (usuarioLogado && usuarioLogado.id === recurso.usuarioId && recurso.solicitacoes && recurso.solicitacoes.length > 0) { %>
+      <div class="solicit-list">
+        <h3>Solicitações recebidas (<%= recurso.solicitacoes.length %>)</h3>
+        <% recurso.solicitacoes.forEach(s => { %>
+          <div class="solicit-item">
+            <div class="solicit-header">
+              <strong><%= s.solicitante.nome %></strong>
+              <span class="status-badge status-<%= s.status %>"><%= s.status %></span>
+            </div>
+            <p><%= s.mensagem %></p>
+            <p class="solicit-dates">📅 <%= s.dataInicio %> → <%= s.dataFim %></p>
+            <% if (s.status === 'pendente') { %>
+              <div class="solicit-actions">
+                <form action="/recursos/solicitacao/<%= s.id %>/status" method="POST">
+                  <input type="hidden" name="status" value="aprovada" />
+                  <button type="submit" class="btn-sm-green">✅ Aprovar</button>
+                </form>
+                <form action="/recursos/solicitacao/<%= s.id %>/status" method="POST">
+                  <input type="hidden" name="status" value="recusada" />
+                  <button type="submit" class="btn-sm-red">❌ Recusar</button>
+                </form>
+              </div>
+            <% } else if (s.status === 'aprovada') { %>
+              <form action="/recursos/solicitacao/<%= s.id %>/status" method="POST">
+                <input type="hidden" name="status" value="concluida" />
+                <button type="submit" class="btn-sm-green">🏁 Marcar como concluído (+10pts)</button>
+              </form>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

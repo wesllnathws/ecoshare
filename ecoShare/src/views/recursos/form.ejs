@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+
+<div class="container page-top">
+  <a href="/recursos/meus" class="back-link">← Meus Recursos</a>
+  <div class="form-wrap">
+    <h1 class="page-title"><%= recurso ? '✏️ Editar Recurso' : '➕ Novo Recurso' %></h1>
+
+    <% if (erro) { %>
+      <div class="alert-error"><%= erro %></div>
+    <% } %>
+
+    <form action="/recursos/<%= recurso ? recurso.id + '/editar' : 'novo' %>" method="POST" class="form-card">
+      <div class="field">
+        <label>Título do recurso</label>
+        <input type="text" name="titulo" value="<%= recurso ? recurso.titulo : '' %>" placeholder="Ex: Furadeira Bosch 650W" required />
+      </div>
+
+      <div class="field">
+        <label>Descrição</label>
+        <textarea name="descricao" rows="4" placeholder="Descreva o estado, características e condições de uso..." required><%= recurso ? recurso.descricao : '' %></textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Categoria</label>
+          <select name="categoria" required>
+            <option value="">Selecione...</option>
+            <% ['ferramenta','eletronico','movel','veiculo','jardim','esporte','outro'].forEach(cat => { %>
+              <option value="<%= cat %>" <%= recurso && recurso.categoria === cat ? 'selected' : '' %>><%= cat %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="field">
+          <label>Localização</label>
+          <input type="text" name="localizacao" value="<%= recurso ? recurso.localizacao : '' %>" placeholder="Bairro - Cidade" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>URL da imagem (opcional)</label>
+        <input type="url" name="imagem" value="<%= recurso ? recurso.imagem : '' %>" placeholder="https://..." />
+      </div>
+
+      <% if (recurso) { %>
+        <div class="field-check">
+          <label>
+            <input type="checkbox" name="disponivel" <%= recurso.disponivel ? 'checked' : '' %> />
+            Disponível para empréstimo
+          </label>
+        </div>
+      <% } %>
+
+      <div class="form-actions">
+        <a href="/recursos/meus" class="btn-outline">Cancelar</a>
+        <button type="submit" class="btn-primary"><%= recurso ? 'Salvar alterações' : 'Publicar recurso' %></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

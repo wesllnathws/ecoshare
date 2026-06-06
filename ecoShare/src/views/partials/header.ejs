@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= titulo %> | EcoShare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="brand">
+    <span class="brand-icon">🌿</span>
+    <span class="brand-name">Eco<strong>Share</strong></span>
+  </a>
+  <div class="nav-links">
+    <a href="/recursos">Explorar</a>
+    <% if (usuarioLogado) { %>
+      <a href="/recursos/meus">Meus Recursos</a>
+      <a href="/recursos/minhas/solicitacoes">Solicitações</a>
+      <div class="nav-user">
+        <span class="nav-points">🍃 <%= usuarioLogado.pontos %>pts</span>
+        <span class="nav-name"><%= usuarioLogado.nome.split(' ')[0] %></span>
+        <a href="/auth/logout" class="btn-outline-sm">Sair</a>
+      </div>
+    <% } else { %>
+      <a href="/auth/login" class="btn-outline-sm">Entrar</a>
+      <a href="/auth/cadastro" class="btn-sm">Cadastrar</a>
+    <% } %>
+  </div>
+</nav>
+<main>

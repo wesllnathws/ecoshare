@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+<div class="container page-top">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Meus Recursos</h1>
+      <p class="page-sub">Gerencie os recursos que você compartilha</p>
+    </div>
+    <a href="/recursos/novo" class="btn-primary">+ Novo Recurso</a>
+  </div>
+
+  <% if (recursos.length === 0) { %>
+    <div class="empty-state">
+      <div class="empty-icon">📦</div>
+      <p>Você ainda não compartilhou nenhum recurso.</p>
+      <a href="/recursos/novo" class="btn-primary">Compartilhar agora</a>
+    </div>
+  <% } else { %>
+    <div class="recursos-grid">
+      <% recursos.forEach(r => { %>
+        <div class="recurso-card recurso-card--owned">
+          <div class="card-img">
+            <% const emojis = {ferramenta:'🔧',eletronico:'💻',movel:'🪑',veiculo:'🚲',jardim:'🌿',esporte:'⚽',outro:'📦'}; %>
+            <span class="card-emoji"><%= emojis[r.categoria] || '📦' %></span>
+            <span class="card-badge <%= r.disponivel ? 'badge-green' : 'badge-red' %>">
+              <%= r.disponivel ? 'Disponível' : 'Indisponível' %>
+            </span>
+          </div>
+          <div class="card-body">
+            <span class="card-cat"><%= r.categoria %></span>
+            <h3 class="card-title"><%= r.titulo %></h3>
+            <p class="card-desc"><%= r.descricao.substring(0, 70) %>...</p>
+            <% const pendentes = r.solicitacoes ? r.solicitacoes.filter(s => s.status === 'pendente').length : 0; %>
+            <% if (pendentes > 0) { %>
+              <div class="pending-badge">🔔 <%= pendentes %> solicitação(ões) pendente(s)</div>
+            <% } %>
+            <div class="owned-actions">
+              <a href="/recursos/<%= r.id %>" class="btn-sm-outline">Ver</a>
+              <a href="/recursos/<%= r.id %>/editar" class="btn-sm-outline">Editar</a>
+              <form action="/recursos/<%= r.id %>/deletar" method="POST" onsubmit="return confirm('Tem certeza?')">
+                <button type="submit" class="btn-sm-red-outline">Excluir</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

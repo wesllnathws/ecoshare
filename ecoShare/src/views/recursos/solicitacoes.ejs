@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+<div class="container page-top">
+  <h1 class="page-title">Minhas Solicitações</h1>
+  <p class="page-sub">Acompanhe os recursos que você solicitou</p>
+
+  <% if (solicitacoes.length === 0) { %>
+    <div class="empty-state">
+      <div class="empty-icon">📋</div>
+      <p>Você ainda não fez nenhuma solicitação.</p>
+      <a href="/recursos" class="btn-primary">Explorar recursos</a>
+    </div>
+  <% } else { %>
+    <div class="solicit-list-page">
+      <% solicitacoes.forEach(s => { %>
+        <div class="solicit-card">
+          <div class="solicit-card-header">
+            <div>
+              <h3><%= s.recurso.titulo %></h3>
+              <p>Dono: <%= s.recurso.dono.nome %> — <%= s.recurso.dono.cidade %></p>
+            </div>
+            <span class="status-badge status-<%= s.status %>"><%= s.status %></span>
+          </div>
+          <p class="solicit-msg">"<%= s.mensagem %>"</p>
+          <p class="solicit-dates">📅 <%= s.dataInicio %> → <%= s.dataFim %></p>
+          <a href="/recursos/<%= s.recursoId %>" class="btn-sm-outline">Ver recurso</a>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

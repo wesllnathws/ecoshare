@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+<div class="auth-wrap">
+  <div class="auth-box">
+    <div class="auth-logo">🌿 EcoShare</div>
+    <h1 class="auth-title">Bem-vindo de volta</h1>
+    <p class="auth-sub">Entre para compartilhar recursos com sua comunidade</p>
+
+    <% if (erro) { %>
+      <div class="alert-error"><%= erro %></div>
+    <% } %>
+
+    <form action="/auth/login" method="POST" class="auth-form">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="seu@email.com" required />
+      </div>
+      <div class="field">
+        <label>Senha</label>
+        <input type="password" name="senha" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-full">Entrar</button>
+    </form>
+
+    <p class="auth-switch">Não tem conta? <a href="/auth/cadastro">Cadastre-se grátis</a></p>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
