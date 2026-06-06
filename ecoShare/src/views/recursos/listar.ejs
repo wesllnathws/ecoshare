@@ -49,6 +49,9 @@
             <span class="card-emoji"><%= emojis[r.categoria] || '📦' %></span>
             <span class="card-badge <%= r.disponivel ? 'badge-green' : 'badge-red' %>">
               <%= r.disponivel ? 'Disponível' : 'Indisponível' %>
+              <% if (!r.disponivel) { %>
+  <p style="font-size:0.8rem; color:#991b1b; font-weight:600;">⚠️ Este recurso está indisponível no momento.</p>
+<% } %>
             </span>
           </div>
           <div class="card-body">
