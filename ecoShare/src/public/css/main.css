@@ -11,7 +11,7 @@
   --green-800: #14422e;
   --green-700: #1a5c3f;
   --green-600: #1e7a52;
-  --green-500: #22a06b;
+  --green-500: #1e9e65;
   --green-400: #34c987;
   --green-300: #6cdea8;
   --green-100: #d6f5e8;
@@ -56,7 +56,6 @@ img {
   max-width: 100%;
 }
 
-/* ===== NAVBAR ===== */
 .navbar {
   display: flex;
   align-items: center;
