@@ -1,8 +1,6 @@
 const { run, get } = require("./db");
 const bcrypt = require("bcryptjs");
-if (!email.includes("@") || !email.includes(".")) {
-  throw new Error("Email inválido");
-}
+
 const Usuario = {
   findById: function (id) {
     return get("SELECT * FROM usuarios WHERE id = ?", [id]);
@@ -24,6 +22,10 @@ const Usuario = {
     bio = "",
     pontos = 0,
   }) {
+    // valida o email antes de salvar
+    if (!email.includes("@") || !email.includes(".")) {
+      throw new Error("Email inválido");
+    }
     const senhaCriptografada = await bcrypt.hash(senha, 10);
     const resultado = run(
       "INSERT INTO usuarios (nome, email, senha, cidade, bio, pontos) VALUES (?,?,?,?,?,?)",
