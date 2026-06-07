@@ -60,9 +60,11 @@ if (total === 0) {
     )
     .run(
       "Ana Silva",
-      'ana@eco.com',
-       hash1, 'São Paulo - SP', 'Apaixonada por sustentabilidade e consumo consciente alem de ser vegana',
-       40,
+      "ana@eco.com",
+      senha,
+      "São Paulo - SP",
+      "Apaixonada por sustentabilidade e consumo consciente alem de ser vegana",
+      40,
     );
 
   const u2 = db
