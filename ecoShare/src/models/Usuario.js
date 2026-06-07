@@ -1,6 +1,8 @@
 const { run, get } = require("./db");
 const bcrypt = require("bcryptjs");
-
+if (!email.includes('@') || !email.includes('.')) {
+  throw new Error('Email inválido');
+}
 const Usuario = {
   findById: function (id) {
     return get("SELECT * FROM usuarios WHERE id = ?", [id]);
@@ -13,6 +15,12 @@ const Usuario = {
   count: function () {
     return get("SELECT COUNT(*) as n FROM usuarios").n;
   },
+  if (!email.includes('@') || !email.includes('.')) {
+  throw new Error('Email inválido');
+}
+if (!email.includes('@') || !email.includes('.')) {
+  throw new Error('Email inválido');
+}
 
   create: async function ({
     nome,

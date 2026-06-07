@@ -43,6 +43,12 @@ db.exec(`
   );
 `);
 
+db.exec(`
+  CREATE INDEX IF NOT EXISTS idx_recursos_categoria ON recursos(categoria);
+  CREATE INDEX IF NOT EXISTS idx_recursos_usuario ON recursos(usuarioId);
+  CREATE INDEX IF NOT EXISTS idx_solicitacoes_recurso ON solicitacoes(recursoId);
+`);
+
 const total = db.prepare("SELECT COUNT(*) as n FROM usuarios").get().n;
 
 if (total === 0) {
@@ -54,11 +60,9 @@ if (total === 0) {
     )
     .run(
       "Ana Silva",
-      "ana@eco.com",
-      senha,
-      "São Paulo - SP",
-      "Apaixonada por sustentabilidade e consumo consciente",
-      40,
+      'ana@eco.com',
+       hash1, 'São Paulo - SP', 'Apaixonada por sustentabilidade e consumo consciente alem de ser vegana',
+       40,
     );
 
   const u2 = db

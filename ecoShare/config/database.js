@@ -1,9 +1,15 @@
 const { DatabaseSync } = require("node:sqlite");
 const path = require("path");
 
-const DB_PATH = path.join(__dirname, "..", "database.sqlite");
+let db;
 
-const db = new DatabaseSync(DB_PATH);
+try {
+  const DB_PATH = path.join(__dirname, "..", "database.sqlite");
+  db = new DatabaseSync(DB_PATH);
+} catch (err) {
+  console.log("usando banco em memoria");
+  db = new DatabaseSync(":memory:");
+}
 
 db.exec("PRAGMA foreign_keys = ON");
 
