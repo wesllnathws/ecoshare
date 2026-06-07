@@ -55,7 +55,7 @@ if (total === 0) {
     .run(
       "Ana Silva",
       'ana@eco.com',
-       hash1, 'São Paulo - SP', 'Apaixonada por sustentabilidade e consumo consciente',
+       hash1, 'São Paulo - SP', 'Apaixonada por sustentabilidade e consumo consciente alem de ser vegana',
        40,
     );
 

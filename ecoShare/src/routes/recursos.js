@@ -18,4 +18,11 @@ router.post("/solicitar", autenticar, sc.criar);
 router.get("/minhas/solicitacoes", autenticar, sc.minhasSolicitacoes);
 router.post("/solicitacao/:id/status", autenticar, sc.atualizarStatus);
 
+
+router.get('/perfil', autenticar, (req, res) => {
+  const Usuario = require('../models/Usuario');
+  const u = Usuario.findById(req.usuario.id);
+  res.render('recursos/listar', { recursos: [], filtros: {}, titulo: `Perfil de ${u.nome}` });
+});
+
 module.exports = router;
