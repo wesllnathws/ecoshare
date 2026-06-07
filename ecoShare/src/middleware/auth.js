@@ -7,7 +7,7 @@ function gerarToken(usuario) {
   const token = jwt.sign(
     { id: usuario.id, email: usuario.email, nome: usuario.nome },
     SECRET,
-    { expiresIn: "7d" },
+    { expiresIn: '30d' },
   );
   return token;
 }
