@@ -17,8 +17,8 @@
 
       <div class="field">
         <label>Descrição</label>
-        <textarea ... placeholder="Ex: produto em ótimo estado, com manual incluído. Disponível para retirada no bairro.">
-      </div>
+        <textarea name="descricao" rows="4" placeholder="Ex: produto em ótimo estado, com manual incluído. Disponível para retirada no bairro." required><%= recurso ? recurso.descricao : '' %></textarea>
+</div>
 
       <div class="field-row">
         <div class="field">
