@@ -1,4 +1,4 @@
-EcoShare — Plataforma de Compartilhamento de Recursos Sustentáveis
+EcoShare  Plataforma de Compartilhamento de Recursos Sustentáveis
 Projeto Acadêmico | Node.js + Express + Sequelize + EJS + JWT
 
 Visão Geral
@@ -8,7 +8,7 @@ Tecnologias
 Backend: Node.js + Express ORM: Sequelize Banco de dados: SQLite (desenvolvimento) Views: EJS (Embedded JavaScript) Autenticação: JWT (JSON Web Tokens) + bcryptjs Deploy: Vercel
 
 Entidades e Relacionamentos
-Usuario (1) ──── (N) Recurso
+Usuario (1) ─── (N) Recurso
 Usuario (1) ──── (N) Solicitacao
 Recurso  (1) ──── (N) Solicitacao
 Entidades
